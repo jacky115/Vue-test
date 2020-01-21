@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            v-for  列表渲染
+            语法 v-for="item in 容器"
+        -->
+        <!-- 
+            v-for="item in data中的对象"
+            写法1：item指key-value中的value值
+            item in 对象
+         -->
+        <ul>
+            <li v-for="item,index,i in per">{{i}}---{{index}}--{{item}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var Vm = new Vue({
+            el:"#app",
+            data:{
+                per:{
+                    id:1,
+                    name:"隔壁老王",
+                    age:38
+                }
+            }
+        })
+    </script>
+</body>
+</html>

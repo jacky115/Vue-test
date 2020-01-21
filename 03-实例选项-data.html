@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <button v-on:click="tap"><p>{{count}}</p></button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      var Vm =  new Vue({
+            el: "#app",
+            // data作用：指定/设置 当前Vue实例所使用的数据
+            // 1.data的值可以是一个对象
+            // 2.data中的数据：可以通过Vue实例对象.属性名(vm.msg) 去访问数据
+            // 3.访问数据 可以通过vm.$data.msg访问数据
+            // 特点：响应式数据(当数据变化时，视图中用数据的位置会自动发生变化)
+            data: {
+                msg: "abc",
+                count:1
+            },
+            methods: {
+              tap:function(){
+                  this.count++
+                  console.log(1)
+              }  
+            },
+        })
+        console.log(Vm)
+        console.log(Vm.msg)
+    </script>
+</body>
+
+</html>

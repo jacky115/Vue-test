@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-on
+            作用：绑定事件
+            语法：  v-on:事件名="methods中的方法"
+        -->
+        {{count}}
+        <button @click="count=count+10">按钮1</button>
+        <button @click.once="fn2()">按钮2</button>
+        <!-- $event代表当前的事件对象 -->
+        <button @click="fn3($event)">按钮3</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var Vm = new Vue({
+            el:"#app",
+            data:{
+                count:1
+            },
+            methods: {
+            fn2(){
+                console.log(123)
+            },
+            fn3(e){
+                console.log(e)
+            }    
+            },
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-for 列表渲染 数组
+            语法：v-for="(item) in 数组名"
+            写法1 item指的是数组中的每个元素的值
+            item in 数组
+            写法2(item,index) item指的是数组中每个元素的值 index值每个元素的下标(item,index) in 数组
+            注意：item和index 可以随便命名 通常是(value,index)in 数组
+        -->
+
+        <ul>
+            <li v-for="(item,index) in list">{{item}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var Vm = new Vue({
+            el:"#app",
+            data:{
+                list:['喜剧','古装','现代']
+            }
+        })
+    </script>
+</body>
+</html>

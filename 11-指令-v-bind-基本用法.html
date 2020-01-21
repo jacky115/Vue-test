@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- V-bind
+            作用：绑定标签的任何属性
+            场景：当标签的属性值 是不确定的  是可以修改的
+            语法：v-bind要绑定属性名="data"中的数据
+        -->
+        <p id="ID">内容</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var Vm = new Vue({
+            el:"#app",
+            data:{
+                per:{
+                    id:1,
+                    name:"隔壁老王",
+                    age:38
+                }
+            }
+        })
+    </script>
+</body>
+</html>

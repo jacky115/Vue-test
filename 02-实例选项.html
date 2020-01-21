@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+<!-- 
+    <div class="container"></div>
+    <div class="container"></div>
+    <div class="container"></div>
+ -->
+
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            // vue 实例选项
+
+            // el
+            // 作用：指定/设置 当前Vue实例所管理的视图
+            // 1.值可以是id选择器
+            // 2.值也可以为其他选择器
+            // 3.值也可以为DOM元素
+            // 注意：不能el直接管理html和body 报错！！mount->挂载
+            // el：'#app'
+            // el:'container'
+            // el:dpcument.getElementById('app')
+            el:"#app",
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

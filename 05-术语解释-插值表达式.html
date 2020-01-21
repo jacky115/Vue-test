@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg>=18?'成年人':'未成年'}}</p>
+        <!-- 指令
+            作用：增强了html标签功能
+            所有指令都是v-开头
+            所有指令代码位置  标签的开始标签位置
+            所有指令都是取而代之的DOM操作
+        -->
+        <button @click="fn2()">按钮</button>
+        <span>{{msg}}</span>
+        <button @click="fn1()">按钮</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var Vm = new Vue({
+            el:"#app",
+        data:{
+            msg:17
+        },
+        methods: {
+            fn1(){
+                this.msg++
+                console.log(this.msg)
+            },
+            fn2(){
+                this.msg--
+                console.log(this.msg)
+            }
+        },  
+        })
+    </script>
+</body>
+</html>
