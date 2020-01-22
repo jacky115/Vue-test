@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 其他表单元素 -->
+        <!-- 1. 多行输入框 
+            在textare中内容区域书写时无效的
+        -->
+        <!-- {{msg}} -->
+        <!-- <textarea v-model="msg"></textarea> -->
+        <!-- 2.复选框checkbox
+            2.1 一个复选框 v-model="bool型"
+            2.2 多个复选框  v-model="[]"
+            数组中保存的值是选中的复选框中的value
+        -->
+        <!-- {{checklist}}
+        <input type="checkbox" value="男" v-model="checklist">AAA
+        <input type="checkbox" value="女" v-model="checklist">BBB
+        <input type="checkbox" value="其他" v-model="checklist">CCC -->
+        <!-- {{picked}} -->
+        <!-- 3.单选框 -->
+        <!-- <input type="radio" value="老王" v-model="picked">AA
+        <input type="radio" value="小王" v-model="picked">BB -->
+
+        <!-- 4.下拉框
+            1.select的值来源于被选中的option的value值
+            2.显示默认option的value和select一样
+        -->
+        {{select}}
+        <select v-model="select" >
+            <option value="" disabled="">请选择</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            
+        </select>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      var Vm =  new Vue({
+            el:"#app",
+            data:{
+                msg:"abc",
+                check:true,
+                checklist:[],
+                picked:'',
+                select:''
+            }
+        })
+    </script>
+</body>
+</html>

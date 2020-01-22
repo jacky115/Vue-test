@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 局部过滤器 -->
+        {{msg | toUpper}}
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"abc"
+            },
+            // 选项filters
+            // 不要忘记s
+            // 1.通过选项filte定义过滤器 filters:{顾虑器名字:function(v){}}
+            // 2.function(v){return 处理结果}
+            // 3.在视图中{{msg | 过滤器名字}}
+            filters: {
+                // toUpper:function(){}
+                toUpper(v) {
+                    return v.charAt(0).toUpperCase() + v.substr(1)
+                }
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

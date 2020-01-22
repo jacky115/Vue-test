@@ -29,7 +29,7 @@
     			<tr v-for="(item,index) in list">
     				<td>{{index+1}}</td>
     				<td>{{item.name}}</td>
-    				<td>{{item.date.toUTCString()}}</td>
+    				<td>{{item.date | fmtDate}}</td>
     				<td>
     					<a href="#" @click.prevent="deleItem(index)">删除</a>
     				</td>
@@ -41,13 +41,20 @@
     	</div>
     </div>
     <script src="./vue.js"></script>
+    <script src="./moment.js"></script>
     <script>
+        // 模拟ajax返回的数据
         var list = [
             {name:"TCL",date:new Date()},
             {name:"HUAWEI",date:new Date()},
             {name:"小米",date:new Date()},
         ]
         console.log(list)
+        // 全局过滤器-处理日期格式
+        Vue.filter('fmtDate',(v) => {
+            // moment
+            return moment(v).format('YYYY-MM-DD hh:mm:ss a')
+        })
         new Vue({
             el:"#app",
             data:{
@@ -96,6 +103,8 @@
         1.找到删除按钮@click="deleItem()"
         2.在methods中提供deleItem()
         3.在deleItem()中从list中移除当前元素
+    五.日期格式处理->过滤器
+        1.
  -->
 
 

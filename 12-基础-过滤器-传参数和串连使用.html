@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.传参数 -->
+        <!-- {{count | toD('元')}} -->
+        <!-- 2.串联
+            {{被处理的数据 | 过滤器A | 过滤器B}}
+
+            注意：过滤器A处理的数据时count
+                过滤器B处理的是过滤器A所返回的结果
+        -->
+        {{count | A(0) | b('元')}}
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        // Vue.filter('toD',(v,i)=>{
+        //     console.log(v,i)
+        //     return '$'+v+i
+        // })
+        Vue.filter('A',(v,i)=>{
+            return '$'+v+i
+        })
+        Vue.filter('B',(v,i)=>{
+            return v+i
+        })
+
+        new Vue({
+            el:"#app",
+            data:{
+                count:100
+            }
+        })
+    </script>
+</body>
+</html>

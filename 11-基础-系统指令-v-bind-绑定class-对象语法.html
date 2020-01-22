@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind class 对象语法
+        active和left是想要渲染的类名
+        当a的值为true 类名active生效
+        当a的值为false 类名active不生效
+        -->
+        <p :class="{active:a,left:b}">内容</p>
+        <p :class="obj">内容</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                a:true,
+                b:true,
+                obj:{
+                    a:true,
+                    b:true, 
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+</html>
