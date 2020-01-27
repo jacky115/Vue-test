@@ -11,12 +11,12 @@
     <div id="app">
     	<div class="add">
     	    品牌名称:
-    	    <input type="text" v-model="itemname">
-    	    <input type="button" value="添加" @click="addItem()">
+    	    <input type="text" v-model="itemname"  v-focus>
+    	    <input :disabled="itemname.length===0" type="button" value="添加" @click="addItem()">
     	</div>
     	<div class="add">
     		品牌名称:
-    		<input type="text" name="" id="" value="" placeholder="请输入搜索条件"/>
+    		<input type="text" name="" id="" value="" placeholder="请输入搜索条件" v-model="searchVal"/>
     	</div>
     	<div>
     		<table class="tb">
@@ -26,7 +26,7 @@
     				<th>创立时间</th>
     				<th>操作</th>
     			</tr>
-    			<tr v-for="(item,index) in list">
+    			<tr v-for="(item,index) in newlist">
     				<td>{{index+1}}</td>
     				<td>{{item.name}}</td>
     				<td>{{item.date | fmtDate}}</td>
@@ -43,6 +43,13 @@
     <script src="./vue.js"></script>
     <script src="./moment.js"></script>
     <script>
+
+        Vue.directive('focus',{
+            inserted(el){
+                console.log(el)
+                el.focus()
+            }
+        })
         // 模拟ajax返回的数据
         var list = [
             {name:"TCL",date:new Date()},
@@ -61,7 +68,22 @@
                 // ES6 当key和value名一样 只写一个单词
                 list,
                 // 输入框要绑定的数据
-                itemname:''
+                itemname:'',
+                // 搜索输入框绑定的数据
+                searchVal:''
+            },
+            //计算属性
+            computed: {
+                newlist() {
+                    // return 数组arr
+                    // arr数组this.list筛选的的结果
+                    // this.list->for 遍历->if(数组元素.name是否以this.searchVal){把该元素保存在新数组中}
+                    
+                    // filter 过滤/筛选数组
+                    return this.list.filter((item) => {
+                        return item.name.startsWith(this.searchVal)
+                    })
+                }
             },
             methods: {
                 // 删除商品
@@ -81,6 +103,23 @@
                 }
             },
         })
+    </script>
+    <script>
+        // filter是数组自带的方法
+        // 遍历数组 可以把满足条件的元素添加到新数组中 并且返回新数组
+        // [].filter((item)=>{return  条件})
+        var arr  = [1,2,3].filter((item)=>{
+            // console.log(item)
+            // item->1,2,3
+            // 把数组中item大于1的元素进行筛选
+            return item>1
+        })
+
+        // console.log(arr)
+
+        // ES6 字符串新API
+        // const res = "abc".startsWith("")
+        // console.log(res)
     </script>
 </body>
 </html>

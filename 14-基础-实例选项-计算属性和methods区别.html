@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>methods中的方法</p>
+        <p>{{fn1()}}</p>
+        <p>{{fn1()}}</p>
+        <p>{{fn1()}}</p>
+        <p>计算属性</p>
+        <p>{{fn2}}</p>
+        <p>{{fn2}}</p>
+        <p>{{fn2}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            // 计算属性的方法
+            // 当计算属性fn2()没有依赖data中的数据时
+            // 第一次使用计算属性时 会把第一次的结果进行缓存
+            // 后期再使用几次计算属性，都会去第一次的结果进行查找
+            // 计算属性使用时  不加()
+            computed: {
+                fn2(){
+                    console.log('fn2...')
+                    return Date()
+                }
+            },
+            // methods方法  每调用一次 就触发一次
+            methods:{
+                fn1(){
+                    console.log('fn1...')
+                    return new Date()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
