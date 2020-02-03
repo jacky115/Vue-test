@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.min.js"></script>
+    <script>
+        // axios.请求方式(url).then((res)=>{获取数据res.data}).catch((err)=>{})
+        // 
+
+        // get查询数据
+        // axios.get("http://localhost:3000/brands")
+        // .then(res => {
+            // console.log(res)
+            // const {status,data} =res
+                //对象的解构
+        //         if(status===200){
+        //             console.log(data)
+        //         }    
+        // })
+        // .catch(err => {
+        //     console.error(err); 
+        // })
+        // 
+        // 
+        // post 添加数据
+        // axios.post(url,{要添加的数据})
+        // axios.post("http://localhost:3000/brands",{
+        //     name:"dell",
+        //     date:new Date()
+        // })
+        // .then(res => {
+        //     console.log(res.status)
+        // })
+        // .catch(err => {
+        //     console.error(err); 
+        // })
+        // put修改/更新数据
+        // axios.put("http://localhost:3000/brands/30", {
+        //    name:"xxx000",
+        //    data:new Date()
+        // })
+        // .then((res)=> {
+        //     console.log(res.status)
+        // })
+        // .catch((error)=> {
+        // }) 
+
+
+        // delete 删除数据
+        axios.delete("http://localhost:3000/brands/26").then((res)=>{
+            console.log(res.status)
+        }).catch((error)=>{
+            console.log(error)
+        })
+
+    </script>
+</body>
+</html>

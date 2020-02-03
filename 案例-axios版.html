@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./jt-1.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="add">
+            品牌名称:
+            <input type="text" v-model="itemname" v-focus>
+            <input :disabled="itemname.length===0" type="button" value="添加" @click="addItem()">
+        </div>
+        <div class="add">
+            品牌名称:
+            <input type="text" name="" id="" value="" placeholder="请输入搜索条件" v-model="searchVal" />
+        </div>
+        <div>
+            <table class="tb">
+                <tr>
+                    <th>编号</th>
+                    <th>品牌名称</th>
+                    <th>创立时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(item,index) in list">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date | fmtDate}}</td>
+                    <td>
+                        <a href="#" @click.prevent="deleItem(item.id)">删除</a>
+                    </td>
+                </tr>
+                <tr v-if="list.length===0">
+                    <td colspan="4">没有品牌数据</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./moment.js"></script>
+    <script src="./axios.min.js"></script>
+    <script>
+
+        // 模拟ajax返回的数据
+
+        // 全局过滤器-处理日期格式
+        Vue.filter('fmtDate', (v) => {
+            // moment
+            return moment(v).format('YYYY-MM-DD hh:mm:ss a')
+        })
+        // 全局自定义指令-获取焦点
+        Vue.directive('focus', {
+            inserted(el) {
+                console.log(el)
+                el.focus()
+            }
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                // list:list
+                // ES6 当key和value名一样 只写一个单词
+                list:[],
+                // 输入框要绑定的数据
+                itemname: '',
+                // 搜索输入框绑定的数据
+                searchVal: ''
+            },
+            //计算属性
+            computed: {
+                newlist() {
+                    // return 数组arr
+                    // arr数组this.list筛选的的结果
+                    // this.list->for 遍历->if(数组元素.name是否以this.searchVal){把该元素保存在新数组中}
+                    // filter 过滤/筛选数组
+                    return this.list.filter((item) => {
+                        return item.name.startsWith(this.searchVal)
+                    })
+                }
+            },
+            // 
+            mounted() {
+                // 调用请求的数据方法
+                this.getAllBrands()
+            },
+            methods: {
+                // 获取所有数据
+                getAllBrands(){
+                    axios.get("http://localhost:3000/brands")
+                    .then(res => {
+                        console.log(res)
+                        const {status,data} = res
+                        if(status===200) {
+                            this.list = data
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
+                },
+                // 删除商品
+                deleItem(ID) {
+                    axios.delete('http://localhost:3000/brands/'+ID)
+                    .then((result) => {
+                        const {status,data} = res
+                        
+                        if(status===200){
+                            // 如果删除成功则刷新视图
+                            
+                            this.getAllBrands()
+                        }
+                    })
+                    
+                    // splice(索引，长度)
+                    // if (confirm('请确认是否删除')) {
+                    //     this.list.splice(index, 1)
+                    // }
+
+                },
+                // 添加商品
+                addItem() {
+                    this.list.unshift({
+                        name: this.itemname,
+                        date: new Date()
+                    })
+                }
+            },
+        })
+    </script>
+    <script>
+        // filter是数组自带的方法
+        // 遍历数组 可以把满足条件的元素添加到新数组中 并且返回新数组
+        // [].filter((item)=>{return  条件})
+        var arr = [1, 2, 3].filter((item) => {
+            // console.log(item)
+            // item->1,2,3
+            // 把数组中item大于1的元素进行筛选
+            return item > 1
+        })
+
+        // console.log(arr)
+
+        // ES6 字符串新API
+        // const res = "abc".startsWith("")
+        // console.log(res)
+    </script>
+</body>
+
+</html>
+<!-- 
+    一.列表渲染
+        1.找到重复出现的标签结构
+        2.确定要用的指令v-for列表渲染(v,i) in list数组
+        3.在data中提供一个数组list
+        4.在视图中通过插值语句{{}}使用数据
+    二. 处理无数据时的渲染
+        1.找到条件渲染的标签
+        2.确定要用的指令  v-if="list.lenght===0"
+    三.添加商品
+        1.找到输入框->v-model="data中的数据"
+        2.在data中提供一个itemname的数据
+        3.找到添加按钮绑定时间 @click="addItem()"
+        4.在methods转给你提供addItem方法
+        5.在addItem()中 想list数组中添加元素
+    四.删除商品
+        1.找到删除按钮@click="deleItem()"
+        2.在methods中提供deleItem()
+        3.在deleItem()中从list中移除当前元素
+    五.日期格式处理->过滤器
+        1.
+ -->
