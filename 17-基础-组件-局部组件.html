@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-a></child-a>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            // 局部组件选项
+            // 1.通过选项定义/注册  局部转眼间
+            // 2.选项template或者data
+            
+            components: {
+                'child-a':{
+                    template:`
+                        <div>我是chlid组件--{{num}}</div>
+                    `,
+                    data() {
+                        return {
+                            num: 100
+                        }
+                    },
+                }
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

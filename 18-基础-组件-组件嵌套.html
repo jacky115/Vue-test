@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 此时，父组件是newVue这个根组件，子组件是child-b -->
+        <child-b></child-b>
+        <!-- 此时，父组件是newVue这个根组件，子组件是child-a -->
+        <child-a></child-a>
+        <child-c></child-c>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component("child-b",{
+            template:`<div>我是child-b组件</div>`
+        })
+        Vue.component("child-c",{
+            template:`<div>我是child-c组件</div>`
+        })
+        // 可以把newVue所管理的驶入当成是整个项目的根组件
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            components:{
+                'child-a':{
+                    template:`<div>我是child-a组件
+                        <child-c></child-c>
+                    </div>`
+                }
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

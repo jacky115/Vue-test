@@ -66,22 +66,46 @@
             data: {
                 // list:list
                 // ES6 当key和value名一样 只写一个单词
-                list:[],
+                list: [],
                 // 输入框要绑定的数据
                 itemname: '',
                 // 搜索输入框绑定的数据
                 searchVal: ''
             },
+            // watch选项  --监视  需要在数据变化时执行异步
+            // 当this.searchVal变化同时->axios.get异步操作请求
+            watch: {
+                searchVal(newV, oldV) {
+                    axios.get('http://localhost:3000/brands?name_like=' + newV)
+                    .then((res) => {
+                        //    return res.data  //返回的是newlist里面的方法 而是需要返回newlist()方法
+                        this.list=res.data
+                        })
+                }
+            },
             //计算属性
             computed: {
                 newlist() {
-                    // return 数组arr
-                    // arr数组this.list筛选的的结果
-                    // this.list->for 遍历->if(数组元素.name是否以this.searchVal){把该元素保存在新数组中}
-                    // filter 过滤/筛选数组
-                    return this.list.filter((item) => {
-                        return item.name.startsWith(this.searchVal)
-                    })
+                    {
+                        // return 数组arr
+                        // arr数组this.list筛选的的结果
+                        // this.list->for 遍历->if(数组元素.name是否以this.searchVal){把该元素保存在新数组中}
+                        // filter 过滤/筛选数组
+                        // return this.list.filter((item) => {
+                        //     return item.name.startsWith(this.searchVal)
+                        // })
+                    }
+                    // 
+                    // 模糊搜索 /brands?name_like
+                    // var arr=[]
+                    axios.get('http://localhost:3000/brands?name_like=' + this.searchVal)
+                        .then((res) => {
+                            //    return res.data  //返回的是newlist里面的方法 而是需要返回newlist()方法
+                            // 因为在newlit里面还有一个方法所以无法直接回调函数，所以需要用watch监视数据变化且执行异步调用方法
+                            var arr = res.data
+                            callback(arr)
+                        })
+                    // return arr
                 }
             },
             // 
@@ -91,32 +115,32 @@
             },
             methods: {
                 // 获取所有数据
-                getAllBrands(){
+                getAllBrands() {
                     axios.get("http://localhost:3000/brands")
-                    .then(res => {
-                        console.log(res)
-                        const {status,data} = res
-                        if(status===200) {
-                            this.list = data
-                        }
-                    })
-                    .catch(err => {
-                        console.error(err); 
-                    })
+                        .then(res => {
+                            console.log(res)
+                            const { status, data } = res
+                            if (status === 200) {
+                                this.list = data
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
                 },
                 // 删除商品
                 deleItem(ID) {
-                    axios.delete('http://localhost:3000/brands/'+ID)
-                    .then((result) => {
-                        const {status,data} = res
-                        
-                        if(status===200){
-                            // 如果删除成功则刷新视图
-                            
-                            this.getAllBrands()
-                        }
-                    })
-                    
+                    axios.delete('http://localhost:3000/brands/' + ID)
+                        .then((result) => {
+                            const { status, data } = res
+                            alert('请确认是否删除')
+                            if (status === 200) {
+                                // 如果删除成功则刷新视图
+
+                                this.getAllBrands()
+                            }
+                        })
+
                     // splice(索引，长度)
                     // if (confirm('请确认是否删除')) {
                     //     this.list.splice(index, 1)
@@ -125,10 +149,24 @@
                 },
                 // 添加商品
                 addItem() {
-                    this.list.unshift({
+                    axios.post("http://localhost:3000/brands", {
                         name: this.itemname,
                         date: new Date()
                     })
+                        .then(res => {
+                            const { status } = res
+                            if (status === 201) {
+                                // 如果请求成功就更新视图
+                                this.getAllBrands()
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                    // this.list.unshift({
+                    //     name: this.itemname,
+                    //     date: new Date()
+                    // })
                 }
             },
         })
