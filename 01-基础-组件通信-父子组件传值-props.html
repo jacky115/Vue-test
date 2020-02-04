@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-a :a="msg"></child-a>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('child-a',{
+            // 目的：要在子组件中使用数据a 数据a的值来源于父组件
+            template:`<div>我是child子组件--{{a}}</div>`,
+            // data(){
+            //     return {
+            //         a:100
+            //     }
+            // }
+            // 选项props:['a','b']
+            // props中的数据的值来源于父组件
+            // props中的数据a和data中的数据用法一样
+            // 此时a也是组件<child-a>的属性
+            props:['a']
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"我是父组件的数据msg"
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
